@@ -37,6 +37,7 @@ class AGP_Loader {
         add_shortcode( 'another_gallery_card', [ $shortcodes, 'render_card' ] );
         add_shortcode( 'another_gallery_view', [ $shortcodes, 'render_gallery' ] );
         add_action( 'wp_enqueue_scripts', [ $shortcodes, 'enqueue_frontend_assets' ] );
+        add_filter( 'the_content', [ $shortcodes, 'append_gallery_to_content' ] );
 
         // Frontend: Widgets
         add_action( 'widgets_init', [ $this, 'register_widgets' ] ); // <--- 2. REGISTRAR HOOK

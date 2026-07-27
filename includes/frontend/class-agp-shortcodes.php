@@ -19,6 +19,20 @@ class AGP_Shortcodes {
     }
 
     /**
+     * Inserta el grid de fotos en el contenido al ver el enlace permanente
+     * de una galería, ya que el CPT no tiene editor donde pegar el shortcode.
+     *
+     * @param string $content Contenido original del post.
+     * @return string Contenido con el grid añadido cuando corresponde.
+     */
+    public function append_gallery_to_content( $content ) {
+        if ( is_singular( 'agp_gallery' ) && in_the_loop() && is_main_query() ) {
+            $content .= $this->render_gallery( [ 'id' => get_the_ID() ] );
+        }
+        return $content;
+    }
+
+    /**
      * Renderiza la Card de portada.
      */
     public function render_card( $atts ) {
