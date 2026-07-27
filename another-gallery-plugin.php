@@ -26,3 +26,28 @@ function agp_init_plugin() {
 }
 
 add_action( 'plugins_loaded', 'agp_init_plugin' );
+
+/**
+ * Registra el CPT y regenera las reglas de reescritura al activar el plugin,
+ * para que la vista previa y el enlace permanente funcionen sin tener que
+ * guardar los permalinks manualmente.
+ *
+ * @return void
+ */
+function agp_activate_plugin() {
+    require_once AGP_PLUGIN_PATH . 'includes/core/class-agp-cpt.php';
+    ( new AGP_CPT() )->register_post_type();
+
+    flush_rewrite_rules();
+}
+register_activation_hook( __FILE__, 'agp_activate_plugin' );
+
+/**
+ * Limpia las reglas de reescritura al desactivar el plugin.
+ *
+ * @return void
+ */
+function agp_deactivate_plugin() {
+    flush_rewrite_rules();
+}
+register_deactivation_hook( __FILE__, 'agp_deactivate_plugin' );
