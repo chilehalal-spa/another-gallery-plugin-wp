@@ -1,5 +1,7 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Widget para mostrar la Tarjeta (Card) de una galería en sidebars.
  */

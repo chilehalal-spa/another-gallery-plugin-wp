@@ -1,5 +1,7 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
+
 class AGP_Metaboxes {
 
     public function add_meta_box() {
@@ -81,15 +83,18 @@ class AGP_Metaboxes {
         global $post;
         if ( ( 'post.php' === $hook || 'post-new.php' === $hook ) && $post && 'agp_gallery' === $post->post_type ) {
             wp_enqueue_media();
-            
+
             // Estilos Admin UI (Shortcode Box)
-            wp_enqueue_style( 'agp-admin-ui-css', AGP_PLUGIN_URL . 'assets/css/admin/agp-ui.css', [], '2.3.0' );
-            
+            $ui_css = 'assets/css/admin/agp-ui.css';
+            wp_enqueue_style( 'agp-admin-ui-css', AGP_PLUGIN_URL . $ui_css, [], filemtime( AGP_PLUGIN_PATH . $ui_css ) );
+
             // Estilos Admin Uploader (Dropzone)
-            wp_enqueue_style( 'agp-admin-uploader-css', AGP_PLUGIN_URL . 'assets/css/admin/agp-uploader.css', [], '2.3.0' );
-            
+            $uploader_css = 'assets/css/admin/agp-uploader.css';
+            wp_enqueue_style( 'agp-admin-uploader-css', AGP_PLUGIN_URL . $uploader_css, [], filemtime( AGP_PLUGIN_PATH . $uploader_css ) );
+
             // Script Uploader
-            wp_enqueue_script( 'agp-admin-js', AGP_PLUGIN_URL . 'assets/js/agp-admin-uploader.js', [ 'jquery', 'jquery-ui-sortable' ], '2.3.0', true );
+            $uploader_js = 'assets/js/agp-admin-uploader.js';
+            wp_enqueue_script( 'agp-admin-js', AGP_PLUGIN_URL . $uploader_js, [ 'jquery', 'jquery-ui-sortable' ], filemtime( AGP_PLUGIN_PATH . $uploader_js ), true );
         }
     }
 }

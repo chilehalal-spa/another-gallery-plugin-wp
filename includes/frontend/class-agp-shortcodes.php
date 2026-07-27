@@ -1,14 +1,21 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
+
 class AGP_Shortcodes {
 
     public function enqueue_frontend_assets() {
-        // Versión 2.8.0 para forzar la limpieza de caché y borrar las tarjetas
-        wp_enqueue_style( 'agp-card-css', AGP_PLUGIN_URL . 'assets/css/frontend/agp-card.css', [], '2.8.0' );
-        wp_enqueue_style( 'agp-grid-css', AGP_PLUGIN_URL . 'assets/css/frontend/agp-grid.css', [], '2.8.0' );
-        wp_enqueue_style( 'agp-lightbox-css', AGP_PLUGIN_URL . 'assets/css/frontend/agp-lightbox.css', [], '2.8.0' );
-        
-        wp_enqueue_script( 'agp-frontend-js', AGP_PLUGIN_URL . 'assets/js/agp-lightbox.js', [], '2.8.0', true );
+        $card_css     = 'assets/css/frontend/agp-card.css';
+        $grid_css     = 'assets/css/frontend/agp-grid.css';
+        $lightbox_css = 'assets/css/frontend/agp-lightbox.css';
+        $lightbox_js  = 'assets/js/agp-lightbox.js';
+
+        // Versión basada en la fecha de modificación del archivo: el caché se invalida solo en cada cambio
+        wp_enqueue_style( 'agp-card-css', AGP_PLUGIN_URL . $card_css, [], filemtime( AGP_PLUGIN_PATH . $card_css ) );
+        wp_enqueue_style( 'agp-grid-css', AGP_PLUGIN_URL . $grid_css, [], filemtime( AGP_PLUGIN_PATH . $grid_css ) );
+        wp_enqueue_style( 'agp-lightbox-css', AGP_PLUGIN_URL . $lightbox_css, [], filemtime( AGP_PLUGIN_PATH . $lightbox_css ) );
+
+        wp_enqueue_script( 'agp-frontend-js', AGP_PLUGIN_URL . $lightbox_js, [], filemtime( AGP_PLUGIN_PATH . $lightbox_js ), true );
     }
 
     /**

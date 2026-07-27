@@ -1,5 +1,7 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
+
 require_once AGP_PLUGIN_PATH . 'includes/core/class-agp-cpt.php';
 require_once AGP_PLUGIN_PATH . 'includes/admin/class-agp-metaboxes.php';
 require_once AGP_PLUGIN_PATH . 'includes/frontend/class-agp-shortcodes.php';
