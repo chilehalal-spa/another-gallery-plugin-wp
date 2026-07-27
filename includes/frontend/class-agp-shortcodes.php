@@ -52,11 +52,13 @@ class AGP_Shortcodes {
         ob_start();
         ?>
         <div class="agp-grid-container">
-            <?php foreach ( $id_array as $img_id ) : 
+            <?php foreach ( $id_array as $img_id ) :
+                $attachment = get_post( $img_id );
+                if ( ! $attachment ) continue;
+
                 $thumb = wp_get_attachment_image_url( $img_id, 'medium_large' );
                 $full  = wp_get_attachment_image_url( $img_id, 'full' );
-                $attachment = get_post( $img_id );
-                $caption = $attachment->post_excerpt; 
+                $caption = $attachment->post_excerpt;
             ?>
                 <div class="agp-grid-item">
                     <div class="agp-grid-image-wrap">

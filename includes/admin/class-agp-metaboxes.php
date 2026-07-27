@@ -79,7 +79,7 @@ class AGP_Metaboxes {
 
     public function enqueue_admin_assets( $hook ) {
         global $post;
-        if ( ( 'post.php' === $hook || 'post-new.php' === $hook ) && 'agp_gallery' === $post->post_type ) {
+        if ( ( 'post.php' === $hook || 'post-new.php' === $hook ) && $post && 'agp_gallery' === $post->post_type ) {
             wp_enqueue_media();
             
             // Estilos Admin UI (Shortcode Box)
