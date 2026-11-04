@@ -2,12 +2,20 @@
 /**
  * Plugin Name: Another Gallery Plugin
  * Description: Plugin modular de galerías con estructura assets/includes.
- * Version: 2.0
+ * Version: 2.1.0
  * Author: Zumito
  * Text Domain: another-gallery-plugin
+ * Requires at least: 5.8
+ * License: GPL-2.0-or-later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Update URI: https://github.com/chilehalal-spa/another-gallery-plugin-wp
  */
 
 defined( 'ABSPATH' ) || exit;
+
+// Actualizaciones desde las releases de GitHub
+require_once __DIR__ . '/includes/class-chilehalal-github-updater.php';
+Chilehalal_GitHub_Updater_V1::register( __FILE__, 'chilehalal-spa/another-gallery-plugin-wp' );
 
 // Definimos la ruta base para facilitar los includes
 define( 'AGP_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
